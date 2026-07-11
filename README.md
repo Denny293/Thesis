@@ -78,16 +78,6 @@ Trains q10/q50/q90 LMP forecasters, learns charge/discharge thresholds, and back
 
 ---
 
-## Installation
-
-Requires Python 3.8+.
-
-```bash
-pip install pypsa pandas numpy matplotlib seaborn statsmodels pmdarima xgboost scikit-learn scipy joblib
-```
-
----
-
 ## Execution Workflow
 
 ```bash
