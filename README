@@ -1,0 +1,41 @@
+# BESS Arbitrage & Power System Simulation (2030 Projection)
+
+This repository contains a comprehensive Python-based pipeline for modeling the power grid, projecting renewable energy capacities for 2030, and evaluating Battery Energy Storage System (BESS) arbitrage strategies using Machine Learning.
+
+## Pipeline Overview
+
+The project is divided into three main scripts/modules:
+
+### 1. Capacity & Demand Forecasting
+- **Models Used:** ARIMA and Holt-Winters Exponential Smoothing.
+- **Functionality:** Ingests historical ENTSO-E generation capacity and demand data (e.g., for Germany), predicting values up to 2030.
+- **Outputs:** Generates the `pypsa_capacity_2030.csv` matrix used to scale the grid model.
+
+### 2. PyPSA Grid Simulation
+- **Tools Used:** PyPSA, Gurobi solver, Linopy.
+- **Functionality:** Scales baseline electricity networks (`base_s_50_elec_.nc`) using the 2030 capacity forecasts. It dynamically adds BESS storage units to AC buses, enforces maximum renewable energy (RE) constraints, and optimizes monthly generation dispatch.
+- **Outputs:** Combined annual baseline and 2030 projection network NetCDF files, system cost metrics (`metrics_annual.csv`), Locational Marginal Price (LMP) distributions, and comprehensive dispatch plots.
+
+### 3. ML-Driven BESS Arbitrage Backtesting
+- **Models Used:** XGBoost (Quantile Regression), SciPy (LP Oracle).
+- **Functionality:** Trains ML models on historical PyPSA network data to predict Locational Marginal Prices (q10, q50, q90). It establishes learned charge/discharge thresholds and executes backtested market dispatch strategies. Performance is compared against naive persistence baselines and a perfect-foresight Linear Programming (LP) Oracle.
+- **Outputs:** Financial performance summaries, capture ratios, dispatch heatmaps, and price forecasting accuracy metrics.
+
+## Installation & Dependencies
+
+Ensure you have Python 3.8+ installed. The following major packages are required:
+
+```bash
+pip install pypsa pandas numpy matplotlib seaborn statsmodels pmdarima xgboost scikit-learn scipy joblib
+```
+
+*Note: The PyPSA simulation module is configured to use the **Gurobi** solver, which requires an active academic or commercial license.*
+
+## Execution Workflow
+
+1. **Forecasting Matrix Generation:** 
+   Run the forecasting script to build predictions and save `pypsa_capacity_2030.csv`.
+2. **Grid Simulation:** 
+   Run the PyPSA script to execute `run_monthly_simulations()` and build the optimized 2030 network projections.
+3. **Arbitrage Strategy Evaluation:** 
+   Run the ML backtesting suite to train price regressors and evaluate BESS operational revenues over the generated LMP price curves.
