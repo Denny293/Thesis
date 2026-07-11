@@ -12,6 +12,12 @@
 A Python pipeline for modeling the German power grid, projecting renewable capacity to 2030, and evaluating ML-driven Battery Energy Storage System (BESS) arbitrage strategies.
 
 </div>
+<img width="800" height="800" alt="model_base_grid" src="https://github.com/user-attachments/assets/1be8e99f-81d0-4353-8635-efdf429be201" />
+
+<img width="2250" height="1800" alt="annual_dispatch" src="https://github.com/user-attachments/assets/95c20088-b27d-4c0b-a2d1-caa7f3bc0f28" />
+
+<img width="1903" height="676" alt="Screenshot 2026-06-21 205445" src="https://github.com/user-attachments/assets/f923d511-7689-4a55-b05b-6f09738247de" />
+
 
 ---
 
